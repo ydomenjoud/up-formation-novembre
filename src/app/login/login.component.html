@@ -1,0 +1,53 @@
+
+<p *ngIf="message">
+  {{ message }}
+</p>
+
+<div *ngIf="displayForm">
+
+  <select (change)="selectFormule(+$event.target.value)">
+    <option
+      *ngFor="let formule of formulesList; let i = index; "
+      [value]="i">
+      {{ formule.name }} ( {{ formule.price | currency : 'EUR'}} )
+    </option>
+  </select>
+
+  <p *ngIf="formulesList[selectedFormuleIndex] as formule">
+    Vous avez selectionné
+    la formule {{ formule.name }}
+    à {{ formule.price | currency: 'EUR'}}
+  </p>
+
+  <label>
+    Login
+    <input
+      (keyup)="checkEmail(emailInput)"
+      #emailInput
+      [class.error]="emailInputError"
+      type="text"
+      placeholder="email address"
+    >
+  </label>
+
+  <label>
+    Password
+    <input
+      (keyup)="checkPassword(passwordInput)"
+      [class.error]="passwordInputError"
+      #passwordInput
+      type="password"
+      placeholder="secret password">
+  </label>
+
+  <button
+    [disabled]="passwordInputError || emailInputError "
+    (click)="send(emailInput, passwordInput)">
+    Send
+  </button>
+
+  <button>
+    Cancel
+  </button>
+
+</div>
