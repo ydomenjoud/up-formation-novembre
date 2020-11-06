@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
     const email = emailInput.value;
     const password = passwordInput.value;
 
+    // à transformer
     if (email === 'me@up.coop' && password === '123456') {
       this.message = 'Credentials OK';
       this.displayForm = false;

@@ -10,7 +10,9 @@ export interface User {
 })
 export class UserService {
 
-  private usersList: User[] = [];
+  private usersList: User[] = [
+    {email: 'me@up.coop', password: '123456'}
+  ];
 
   constructor() { }
 }
