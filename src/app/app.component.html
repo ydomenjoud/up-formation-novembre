@@ -1,9 +1,18 @@
-<!--<router-outlet></router-outlet>-->
+<a routerLink="/">Home</a>
+<a routerLink="/lifecycle">Lifecycle</a>
+
+<div style="display: flex">
+  <div>
+
+    <ul>
+      <li *ngFor="let log of getLogs()">
+        {{ log.date }} -- {{ log.message }}
+      </li>
+    </ul>
 
 
-<div
-  appActive="yellow"
-  (hovered)="log($event)"
-  >
-  HELOLLLO
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Log, LogService } from './log.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'formation-novembre';
+
+  private logService: LogService;
+
+  constructor(logService: LogService) {
+    this.logService = logService;
+  }
+
+  getLogs(): Log[] {
+    return this.logService.history;
+  }
 
   isLogged($event: boolean): void {
     console.log($event);

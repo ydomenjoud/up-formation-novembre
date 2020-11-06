@@ -7,13 +7,17 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ActiveDirective } from './active.directive';
 import { HighlightDirective } from './highlight.directive';
+import { LifecycleComponent } from './lifecycle/lifecycle.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ActiveDirective,
-    HighlightDirective
+    HighlightDirective,
+    LifecycleComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
