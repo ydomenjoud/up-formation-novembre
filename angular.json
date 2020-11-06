@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "formation-novembre"
+    }
+  },
+  "defaultProject": "formation-novembre",
+  "cli": {
+    "analytics": "f0691cc7-53b1-4ff7-8ee3-73f2ef0cd6c3"
+  }
 }
