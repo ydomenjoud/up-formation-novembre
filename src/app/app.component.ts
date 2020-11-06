@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'formation-novembre';
+
+  isLogged($event: boolean): void {
+    console.log($event);
+  }
+
+  log($event: boolean): void {
+    console.log($event);
+  }
 }
