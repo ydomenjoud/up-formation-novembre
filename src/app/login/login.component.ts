@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { UserService } from '../user.service';
 
-interface Formula {
+export interface Formula {
   name: string;
   price: number;
 }
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
   @Input() title = '';
   @Output() readonly logged = new EventEmitter<any>();
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
 
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     const password = passwordInput.value;
 
     // à transformer
-    if (email === 'me@up.coop' && password === '123456') {
+    if (this.userService.find({email, password})) {
       this.message = 'Credentials OK';
       this.displayForm = false;
       this.logged.emit(true);

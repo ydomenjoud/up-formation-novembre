@@ -14,5 +14,12 @@ export class UserService {
     {email: 'me@up.coop', password: '123456'}
   ];
 
-  constructor() { }
+  find({email, password}: User): User {
+    return this.usersList.find(u => u.password === password && u.email === email);
+  }
+
+  register(user: User): void {
+    this.usersList.push(user);
+    console.log('registered', user);
+  }
 }
