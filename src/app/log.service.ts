@@ -20,10 +20,6 @@ export class LogService {
 
   history: Log[] = [];
 
-  constructor() {
-    console.log('coucou from logService');
-  }
-
   addLog(log: Log): void {
     this.history.unshift(log);
   }

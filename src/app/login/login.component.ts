@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { UserService } from '../user.service';
+import { User, UserService } from '../user.service';
 
 export interface Formula {
   name: string;
@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit {
   ];
 
   selectedFormuleIndex: number;
+
+  user: User = {
+    password: '',
+    email: ''
+  };
 
   @Input() displayFees = false;
   @Input() title = '';
@@ -61,5 +66,9 @@ export class LoginComponent implements OnInit {
 
   selectFormule(formuleName: number): void {
     this.selectedFormuleIndex = formuleName;
+  }
+
+  login(): void {
+    this.userService.find(this.user);
   }
 }

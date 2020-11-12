@@ -3,7 +3,9 @@
   {{ message }}
 </p>
 
-<div *ngIf="displayForm">
+<div *ngIf="displayForm" [formGroup]="registrationForm">
+
+  {{ registrationForm.errors | json }}
 
   <select (change)="selectFormule(+$event.target.value)">
     <option
@@ -16,27 +18,58 @@
   <label>
     Login
     <input
-      (keyup)="checkEmail(emailInput)"
-      #emailInput
-      [class.error]="emailInputError"
+      formControlName="email"
       type="text"
       placeholder="email address"
     >
+    <div *ngIf="registrationForm.get('email') as control">
+      <ng-container *ngIf="control.invalid">
+        <ul>
+          <li *ngFor="let error of control.errors | keyvalue">
+             {{ error.key }} : {{ error.value }}
+          </li>
+        </ul>
+      </ng-container>
+    </div>
   </label>
 
   <label>
     Password
     <input
-      (keyup)="checkPassword(passwordInput)"
-      [class.error]="passwordInputError"
-      #passwordInput
+      formControlName="password"
       type="password"
       placeholder="secret password">
+    <div *ngIf="registrationForm.get('password').errors as errors">
+        <ul>
+          <li *ngFor="let error of errors | keyvalue">
+            <div [ngSwitch]="error.key">
+              <ng-template ngSwitchCase="required">
+                le champs requis
+              </ng-template>
+              <ng-template ngSwitchCase="minlength">
+                la longueur minimal est de {{ error.value.requiredLength }}
+                 ( il manque {{ error.value.requiredLength - error.value.actualLength }} caractères )
+              </ng-template>
+            </div>
+          </li>
+        </ul>
+    </div>
   </label>
 
+  <div formGroupName="checkboxes">
+    <label>
+      <input type="checkbox" formControlName="newsletter">
+      recevoir newsletter
+    </label>
+    <label>
+      <input type="checkbox" formControlName="share_data">
+      partager avec nos partenaires
+    </label>
+  </div>
+
   <button
-    [disabled]="passwordInputError || emailInputError "
-    (click)="send(emailInput, passwordInput)">
+    [disabled]="registrationForm.invalid"
+    (click)="register()">
     Send
   </button>
 

@@ -3,7 +3,7 @@
   {{ message }}
 </p>
 
-<div *ngIf="displayForm">
+<form *ngIf="displayForm" #formElement="ngForm">
 
   <select (change)="selectFormule(+$event.target.value)">
     <option
@@ -21,28 +21,28 @@
 
   <label>
     Login
-    <input
-      (keyup)="checkEmail(emailInput)"
-      #emailInput
-      [class.error]="emailInputError"
-      type="text"
-      placeholder="email address"
-    >
+    <input type="text"
+           pattern=".+@.+"
+           name="email"
+           required
+           placeholder="email address"
+           [(ngModel)]="user.email">
   </label>
+
 
   <label>
     Password
-    <input
-      (keyup)="checkPassword(passwordInput)"
-      [class.error]="passwordInputError"
-      #passwordInput
-      type="password"
-      placeholder="secret password">
+    <input type="password"
+           name="password"
+           minlength="4"
+           required
+           placeholder="secret password"
+           [(ngModel)]="user.password">
   </label>
 
   <button
-    [disabled]="passwordInputError || emailInputError "
-    (click)="send(emailInput, passwordInput)">
+    [disabled]="formElement.invalid"
+    (click)="login()">
     Send
   </button>
 
@@ -50,4 +50,4 @@
     Cancel
   </button>
 
-</div>
+</form>

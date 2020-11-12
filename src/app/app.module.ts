@@ -1,4 +1,5 @@
-import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -9,6 +10,7 @@ import { ActiveDirective } from './active.directive';
 import { HighlightDirective } from './highlight.directive';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { RegisterComponent } from './register/register.component';
+import { ListComponent } from './country/list/list.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,15 @@ import { RegisterComponent } from './register/register.component';
     ActiveDirective,
     HighlightDirective,
     LifecycleComponent,
-    RegisterComponent
+    RegisterComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

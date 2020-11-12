@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Formula } from '../login/login.component';
 import { UserService } from '../user.service';
 
@@ -15,9 +16,9 @@ export class RegisterComponent implements OnInit {
   displayForm = true;
 
   formulesList: Formula[] = [
-    { name: 'basic', price: 1.28},
-    { name: 'premium', price: 5.12},
-    { name: 'gold', price: 10.24}
+    {name: 'basic', price: 1.28},
+    {name: 'premium', price: 5.12},
+    {name: 'gold', price: 10.24}
   ];
 
   selectedFormuleIndex: number;
@@ -26,7 +27,10 @@ export class RegisterComponent implements OnInit {
   @Input() title = '';
   @Output() readonly logged = new EventEmitter<any>();
 
-  constructor(private userService: UserService) {
+  registrationForm: FormGroup;
+
+  constructor(private readonly userService: UserService,
+              private readonly fb: FormBuilder) {
   }
 
 
@@ -45,10 +49,44 @@ export class RegisterComponent implements OnInit {
     this.passwordInputError = value.length < 6;
   }
 
-  ngOnInit(): void {
-  }
-
   selectFormule(formuleName: number): void {
     this.selectedFormuleIndex = formuleName;
+  }
+
+  register(): void {
+    console.log(this.registrationForm.value);
+  }
+
+  ngOnInit(): void {
+
+    const unchecked: ValidatorFn = ({value}) => value === false ? null : {unchecked: true};
+
+    const passwordRepeat: ValidatorFn = ({value}) => {
+      if (value.password === value.password_repeat) {
+        return null;
+      }
+      return {
+        passwordRepeat: true
+      };
+    };
+
+    const {required, requiredTrue, minLength, email} = Validators;
+
+    this.registrationForm = this.fb.group({
+      email: ['', [email, required]],
+      password: ['', [minLength(6), required]],
+      password_repeat: ['', [minLength(6), required]],
+      checkboxes: this.fb.group({
+        newsletter: [true, [unchecked]],
+        share_data: [true, [requiredTrue]],
+      })
+    }, {
+      validators: [passwordRepeat]
+    });
+
+    // this.registrationForm.valueChanges.subscribe(
+    //   (changes) => console.log(changes)
+    // );
+
   }
 }
