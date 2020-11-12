@@ -1,0 +1,5 @@
+<button *ngFor="let code of ['ala','guf']" (click)="updateCountryCode(code)">
+  {{ code }}
+</button>
+
+{{ country | json }}

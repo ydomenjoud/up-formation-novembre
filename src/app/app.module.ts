@@ -11,6 +11,7 @@ import { HighlightDirective } from './highlight.directive';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { RegisterComponent } from './register/register.component';
 import { ListComponent } from './country/list/list.component';
+import { DetailComponent } from './country/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ListComponent } from './country/list/list.component';
     HighlightDirective,
     LifecycleComponent,
     RegisterComponent,
-    ListComponent
+    ListComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

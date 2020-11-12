@@ -13,7 +13,19 @@
   </thead>
 
   <tbody>
-    <tr>
+    <tr *ngFor="let country of countriesList">
+      <td>
+        <img [src]="country.flag" >
+      </td>
+      <td>
+        {{ country.timezonesFormatted }}
+      </td>
+      <td>
+         {{ country.languagesFormatted }}
+      </td>
+      <td>
+        <a [routerLink]="['/country', 'detail', country.alpha3Code|lowercase]">detail</a>
+      </td>
     </tr>
   </tbody>
 </table>

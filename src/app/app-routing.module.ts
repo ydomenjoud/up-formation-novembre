@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DetailComponent } from './country/detail/detail.component';
 import { ListComponent } from './country/list/list.component';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { LoginComponent } from './login/login.component';
@@ -11,7 +12,8 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent}, // /auth/register
   ]},
   { path: 'country', children: [
-      { path: 'list',  component: ListComponent}
+      { path: 'list',  component: ListComponent},
+      { path: 'detail/:code',  component: DetailComponent},
   ]},
   { path: 'lifecycle', component: LifecycleComponent}
 ];
